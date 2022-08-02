@@ -23,7 +23,7 @@ CREATE TABLE events(
     title VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
     text TEXT NOT NULL,
-    images TEXT [] NOT NULL,
+    images TEXT [],
     status statusType DEFAULT 'inactive' NOT NULL, 
     personality personalityType NOT NULL,
     fullname VARCHAR(60) NOT NULL,
