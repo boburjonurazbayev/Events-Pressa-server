@@ -9,7 +9,7 @@ const LOGIN = async (req, res) => {
       res.status(200).json({
         status: 200,
         message: "succes",
-        token: jwt.sign(admin.admin_id),
+        token: jwt.sign({ adminId: admin.admin_id }),
       });
     } else {
       res.status(401).json({
