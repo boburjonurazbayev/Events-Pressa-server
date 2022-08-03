@@ -67,13 +67,7 @@ const POST = async (
 
 const PUT = async ({ event_id, status }, { token }) => {
   try {
-    const userId = token ? jwt?.verify(token)?.adminId : null;
-
-    if (userId) {
       return await fetch(query.PUT, status, event_id);
-    } else {
-      return null;
-    }
   } catch (error) {
     console.error(error);
   }
