@@ -1,4 +1,5 @@
 import model from "./model.js";
+import path from "path"
 
 const GET = async (req, res) => {
   try {
@@ -24,8 +25,13 @@ const GET = async (req, res) => {
 
 const POST = async (req, res) => {
   try {
-    const event = await model.POST(req.body, req.files);
+    let fileName = Date.now() + req.files.post_image.name.replace(/\s/g, '')
+    req.files.post_image.mv(path.join(process.cwd(), 'src', 'uploads', fileName))
+    
+    const event = await model.POST(req.body, fileName);
 
+    console.log(event);
+    
     if (event) {
       res.status(201).json({
         status: 201,

@@ -8,32 +8,23 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 ----------------------------------------------------------Events table
 
-CREATE TYPE statusType AS enum('inactive', 'active', 'cancelled' );
-CREATE TYPE eventType AS enum('online', 'offline');
-CREATE TYPE personalityType AS enum('jismoniy', 'yuridik');
-
-DROP TABLE IF EXISTS events;
-CREATE TABLE events(
-    event_id SERIAL PRIMARY KEY,
-    category VARCHAR(60) NOT NULL,
-    sub_category VARCHAR(60) NOT NULL,
-    date DATE NOT NULL,
-    time TIME NOT NULL,
-    event_type eventType NOT NULL,
-    title VARCHAR(100) NOT NULL,
-    description TEXT NOT NULL,
-    text TEXT NOT NULL,
-    images TEXT [],
-    status statusType DEFAULT 'inactive' NOT NULL, 
-    personality personalityType NOT NULL,
-    fullname VARCHAR(60) NOT NULL,
-    profession VARCHAR(60) NOT NULL,
-    contact TEXT [],
-    link VARCHAR(60),
-    company VARCHAR(60)
+drop table if exists events;
+create table events(
+    event_id serial primary key,
+    organiser_fullname varchar(50) not null,
+    organiser_profession varchar(60) not null,
+    organiser_tel1 varchar(12) not null,
+    organiser_tel2 varchar(12) not null,
+    event_date varchar(20) not null,
+    event_category varchar(50) not null,
+    event_type varchar(10) not null,
+    event_link text default null,
+    post_title varchar(200) not null,
+    post_desc text not null,
+    post_image text not null,
+    post_text text not null,
+    status varchar(50) default 'unactive'
 );
-
-CREATE INDEX status_ind ON events (status) WHERE status = 'active';
 
 ---------------------------------------------------------------Admins table
 

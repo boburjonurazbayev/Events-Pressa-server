@@ -18,63 +18,69 @@ const GET = async ({ token }) => {
 
 const POST = async (
   {
-    category,
-    sub_category,
-    date,
-    time,
+    organiser_fullname,
+    organiser_profession,
+    organiser_tel1,
+    organiser_tel2,
+    event_date,
+    event_category,
     event_type,
-    title,
-    description,
-    text,
-    personality,
-    fullname,
-    profession,
-    contact,
-    link,
-    company,
+    event_link,
+    post_title,
+    post_desc,
+    post_text,
   },
-  images
+  post_image
 ) => {
   try {
-    let img = images.map((i) => i.filename)
-
-    return await fetch(query.POST, category,
-      sub_category,
-      date,
-      time,
+    console.log(
+      organiser_fullname,
+      "/n",
+      organiser_profession,
+      "/n",
+      organiser_tel1,
+      "/n",
+      organiser_tel2,
+      "/n",
+      event_date,
+      "/n",
+      event_category,
+      "/n",
       event_type,
-      title,
-      description,
-      text,
-      img,
-      personality,
-      fullname,
-      profession,
-      contact,
-      link,
-      company);
+      "/n",
+      event_link,
+      "/n",
+      post_title,
+      "/n",
+      post_desc,
+      "/n",
+      post_image,
+      "/n",
+      post_text
+    );
+
+    return await fetch(query.POST);
   } catch (error) {
     console.error(error);
   }
 };
 
-const PUT = async ({event_id, status}, {token}) => {
+const PUT = async ({ event_id, status }, { token }) => {
   try {
-
     const userId = token ? jwt?.verify(token)?.adminId : null;
 
     if (userId) {
-      return await fetch(query.PUT, status, event_id)
+      return await fetch(query.PUT, status, event_id);
     } else {
-      return null
+      return null;
     }
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 export default {
   GET,
   POST,
-  PUT
+  PUT,
 };
